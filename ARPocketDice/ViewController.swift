@@ -10,81 +10,92 @@ import UIKit
 import SceneKit
 import ARKit
 
-class ViewController: UIViewController, ARSCNViewDelegate {
+class ViewController: UIViewController {
 
+    // MARK: - Properties
+    
+    
+    // MARK: - Outlets
     @IBOutlet var sceneView: ARSCNView!
     @IBOutlet weak var statusLabel: UILabel!
     @IBOutlet weak var startButton: UIButton!
-    override var prefersStatusBarHidden: Bool {
-        return true
-    }
+    
+    // MARK: - Actions
     @IBAction func startButtonPressed(_ sender: UIButton) {
         
     }
     
     @IBAction func styleButtonTapped(_ sender: UIButton) {
+        
     }
     
     @IBAction func resetButtonTapped(_ sender: UIButton) {
+        
     }
+    
+    // MARK: - View Management
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        // Set the view's delegate
-        sceneView.delegate = self
-        
-        // Show statistics such as fps and timing information
-        sceneView.showsStatistics = true
-        
-        // Create a new scene
-//        let scene = SCNScene(named: "art.scnassets/ship.scn")!
-        let scene = SCNScene(named: "PokerDice.scnassets/SimpleScene.scn")!
-        // Set the scene to the view
-        sceneView.scene = scene
-        statusLabel.text = "Greetings! :]"
+        initSceneView()
+        initScene()
+        initARSession()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
-        // Create a session configuration
-        let configuration = ARWorldTrackingConfiguration()
-
-        // Run the view's session
-        sceneView.session.run(configuration)
+        print("*** ViewWillAppear()")
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        
-        // Pause the view's session
-        sceneView.session.pause()
+        print("*** ViewWillDisappear()")
     }
+    
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        print("*** DidReceiveMemoryWarning()")
+    }
+    
+    override var prefersStatusBarHidden: Bool {
+        return true
+    }
+    
+    // MARK: - Initialization
+    
+    private func initSceneView() {
+        sceneView.delegate = self
+        sceneView.showsStatistics = true
+    }
+    
+    private func initScene() {
+        let scene = SCNScene(named: "PokerDice.scnassets/SimpleScene.scn")!
+        scene.isPaused = false
+        sceneView.scene = scene
+    }
+    
+    private func initARSession() {
+        guard ARWorldTrackingConfiguration.isSupported else {
+            print("*** ARConfig: AR World Tracking Not Supported")
+            return
+        }
+        // 1
+        let config = ARWorldTrackingConfiguration()
+        // 2
+        config.worldAlignment = .gravity
+        // 3
+        config.providesAudioData = false
+        sceneView.session.run(config)
+    }
+}
 
-    // MARK: - ARSCNViewDelegate
+
+extension ViewController: ARSCNViewDelegate {
+    // MARK: - SceneKit Management
     
-/*
-    // Override to create and configure nodes for anchors added to the view's session.
-    func renderer(_ renderer: SCNSceneRenderer, nodeFor anchor: ARAnchor) -> SCNNode? {
-        let node = SCNNode()
-     
-        return node
-    }
-*/
+    // MARK: - Session State Management
     
-    func session(_ session: ARSession, didFailWithError error: Error) {
-        // Present an error message to the user
-        
-    }
+    // MARK: - Session Error Managent
     
-    func sessionWasInterrupted(_ session: ARSession) {
-        // Inform the user that the session has been interrupted, for example, by presenting an overlay
-        
-    }
-    
-    func sessionInterruptionEnded(_ session: ARSession) {
-        // Reset tracking and/or remove existing anchors if consistent tracking is required
-        
-    }
+    // MARK: - Plane Management
 }
