@@ -13,7 +13,7 @@ import ARKit
 class ViewController: UIViewController {
 
     // MARK: - Properties
-    
+    var trackingStatus: String = "Normal"
     
     // MARK: - Outlets
     @IBOutlet var sceneView: ARSCNView!
@@ -66,6 +66,7 @@ class ViewController: UIViewController {
     private func initSceneView() {
         sceneView.delegate = self
         sceneView.showsStatistics = true
+        sceneView.debugOptions = [.showFeaturePoints, .showWorldOrigin, .showBoundingBoxes, .showWireframe]
     }
     
     private func initScene() {
@@ -91,11 +92,53 @@ class ViewController: UIViewController {
 
 
 extension ViewController: ARSCNViewDelegate {
+    
     // MARK: - SceneKit Management
-    
+    func renderer(_ renderer: SCNSceneRenderer,
+                  updateAtTime time: TimeInterval) {
+        DispatchQueue.main.async {
+            self.statusLabel.text = self.trackingStatus
+        }
+    }
     // MARK: - Session State Management
-    
+    func session(_ session: ARSession,
+                 cameraDidChangeTrackingState camera: ARCamera) {
+        switch camera.trackingState {
+        // 1
+        case .notAvailable:
+            trackingStatus = "Tracking: Not available!"
+        // 2
+        case .normal:
+            trackingStatus = "Tracking: All good!"
+        // 3
+        case .limited(let reason):
+            switch reason {
+            case .excessiveMotion:
+                trackingStatus = "Tracking: Limited due to excessive motion!"
+            // 3.1
+            case .insufficientFeatures:
+                trackingStatus = "Tracking: Limited due to insufficient features!"
+            // 3.2
+            case .initializing:
+                trackingStatus = "Tracking: Initializing..."
+            // 3.3
+            case .relocalizing:
+                trackingStatus = "Tracking: Relocalizing..."
+            }
+        }
+    }
     // MARK: - Session Error Managent
+    func session(_ session: ARSession,
+                 didFailWithError error: Error) {
+        trackingStatus = "AR Session Failure: \(error)"
+    }
     
+    func sessionWasInterrupted(_ session: ARSession) {
+        trackingStatus = "AR Session Was Interrupted!"
+    }
+    func sessionInterruptionEnded(_ session: ARSession) {
+        trackingStatus = "AR Session Interruption Ended"
+    }
     // MARK: - Plane Management
+    
 }
