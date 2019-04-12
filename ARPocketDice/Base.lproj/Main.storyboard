@@ -20,6 +20,10 @@
                         <subviews>
                             <arscnView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BrB-h1-WRS">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="862"/>
+                                <gestureRecognizers/>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="n4i-Fn-WBw" appends="YES" id="eKi-Io-GpG"/>
+                                </connections>
                             </arscnView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FnU-kB-tNE">
                                 <rect key="frame" x="16" y="104" width="66" height="50"/>
@@ -125,12 +129,19 @@
                         <viewLayoutGuide key="safeArea" id="fQZ-KI-GVf"/>
                     </view>
                     <connections>
+                        <outlet property="resetButton" destination="L1V-ZT-27H" id="Ly6-6s-qMX"/>
                         <outlet property="sceneView" destination="BrB-h1-WRS" id="5nT-qQ-ynl"/>
                         <outlet property="startButton" destination="Ucg-j1-nbg" id="P1l-4e-LP5"/>
                         <outlet property="statusLabel" destination="lc0-ff-Zlz" id="66a-x3-Cbm"/>
+                        <outlet property="styleButton" destination="FnU-kB-tNE" id="hOf-3D-kys"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SZV-WD-TEh" sceneMemberID="firstResponder"/>
+                <swipeGestureRecognizer direction="up" id="n4i-Fn-WBw">
+                    <connections>
+                        <action selector="swipeUpGestureHandler:" destination="BV1-FR-VrT" id="Ips-0e-eCT"/>
+                    </connections>
+                </swipeGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="137.68115942028987" y="112.5"/>
         </scene>
