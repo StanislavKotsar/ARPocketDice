@@ -13,6 +13,10 @@
 		79108B3F2259472500FB584E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 79108B3E2259472500FB584E /* Assets.xcassets */; };
 		79108B422259472500FB584E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 79108B402259472500FB584E /* LaunchScreen.storyboard */; };
 		79108B5C225A4E9B00FB584E /* PokerDice.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = 79108B5B225A4E9B00FB584E /* PokerDice.scnassets */; };
+		79EA3E262269B9950098F19E /* GameUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79EA3E222269B9950098F19E /* GameUtils.swift */; };
+		79EA3E272269B9950098F19E /* SCNVector3+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79EA3E232269B9950098F19E /* SCNVector3+Extension.swift */; };
+		79EA3E282269B9950098F19E /* Generics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79EA3E242269B9950098F19E /* Generics.swift */; };
+		79EA3E292269B9950098F19E /* Random+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79EA3E252269B9950098F19E /* Random+Extension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +28,10 @@
 		79108B412259472500FB584E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		79108B432259472500FB584E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		79108B5B225A4E9B00FB584E /* PokerDice.scnassets */ = {isa = PBXFileReference; lastKnownFileType = wrapper.scnassets; path = PokerDice.scnassets; sourceTree = "<group>"; };
+		79EA3E222269B9950098F19E /* GameUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameUtils.swift; sourceTree = "<group>"; };
+		79EA3E232269B9950098F19E /* SCNVector3+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SCNVector3+Extension.swift"; sourceTree = "<group>"; };
+		79EA3E242269B9950098F19E /* Generics.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Generics.swift; sourceTree = "<group>"; };
+		79EA3E252269B9950098F19E /* Random+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Random+Extension.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,6 +64,7 @@
 		79108B342259472300FB584E /* ARPocketDice */ = {
 			isa = PBXGroup;
 			children = (
+				79EA3E212269B9950098F19E /* GameUtils */,
 				79108B5B225A4E9B00FB584E /* PokerDice.scnassets */,
 				79108B352259472300FB584E /* AppDelegate.swift */,
 				79108B392259472300FB584E /* ViewController.swift */,
@@ -65,6 +74,17 @@
 				79108B432259472500FB584E /* Info.plist */,
 			);
 			path = ARPocketDice;
+			sourceTree = "<group>";
+		};
+		79EA3E212269B9950098F19E /* GameUtils */ = {
+			isa = PBXGroup;
+			children = (
+				79EA3E222269B9950098F19E /* GameUtils.swift */,
+				79EA3E232269B9950098F19E /* SCNVector3+Extension.swift */,
+				79EA3E242269B9950098F19E /* Generics.swift */,
+				79EA3E252269B9950098F19E /* Random+Extension.swift */,
+			);
+			path = GameUtils;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -140,7 +160,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				79108B3A2259472300FB584E /* ViewController.swift in Sources */,
+				79EA3E262269B9950098F19E /* GameUtils.swift in Sources */,
+				79EA3E282269B9950098F19E /* Generics.swift in Sources */,
 				79108B362259472300FB584E /* AppDelegate.swift in Sources */,
+				79EA3E292269B9950098F19E /* Random+Extension.swift in Sources */,
+				79EA3E272269B9950098F19E /* SCNVector3+Extension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
