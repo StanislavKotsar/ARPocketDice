@@ -117,6 +117,8 @@ class ViewController: UIViewController {
     sceneView.scene = scene
     scene.lightingEnvironment.contents = "PokerDice.scnassets/Textures/Environment_CUBE.jpg"
     scene.lightingEnvironment.intensity = 2
+    scene.physicsWorld.speed = 1
+    scene.physicsWorld.timeStep = 1.0 / 60.0
   }
   
   func initARSession() {
@@ -224,6 +226,20 @@ class ViewController: UIViewController {
     }
   }
   
+  func updateDiceNodes() {
+    // 1
+    for node in sceneView.scene.rootNode.childNodes {
+      // 2
+      if node.name == "dice" {
+        if  node.presentation.position.y < -2 {
+          // 3
+          node.removeFromParentNode()
+          diceCount += 1
+        }
+      }
+    }
+  }
+  
 }
 
 extension ViewController : ARSCNViewDelegate {
@@ -235,6 +251,7 @@ extension ViewController : ARSCNViewDelegate {
     DispatchQueue.main.async {
       self.updateStatus()
       self.updateFocusNode()
+      self.updateDiceNodes()
     }
   }
   
