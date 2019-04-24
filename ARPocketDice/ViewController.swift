@@ -186,6 +186,8 @@ class ViewController: UIViewController {
     // 3
     planeNode.transform = SCNMatrix4MakeRotation(-Float.pi / 2, 1, 0, 0)
     // 4
+    planeNode.physicsBody = createARPlanePhysics(
+      geometry: planeGeometry)
     return planeNode
   }
   
@@ -196,6 +198,9 @@ class ViewController: UIViewController {
     planeGeometry.width = CGFloat(planeAchor.extent.x)
     planeGeometry.height = CGFloat(planeAchor.extent.z)
     planeNode.position = SCNVector3Make(planeAchor.center.x, 0, planeAchor.center.z)
+    planeNode.physicsBody = nil
+    planeNode.physicsBody = createARPlanePhysics(
+      geometry: planeGeometry)
     
   }
   
@@ -238,6 +243,20 @@ class ViewController: UIViewController {
         }
       }
     }
+  }
+  
+  func createARPlanePhysics(geometry: SCNGeometry) -> SCNPhysicsBody {
+    // 1
+    let physicsBody = SCNPhysicsBody(
+      type: .kinematic,
+      // 2
+      shape: SCNPhysicsShape(geometry: geometry,
+                             options: nil))
+    // 3
+    physicsBody.restitution = 0.5
+    physicsBody.friction = 0.5
+    // 4
+    return physicsBody
   }
   
 }
