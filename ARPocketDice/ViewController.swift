@@ -159,12 +159,30 @@ class ViewController: UIViewController {
   // MARK: - Helper Functions
   
   func throwDiceNode(transform: SCNMatrix4, offset: SCNVector3) {
+    // 1
+    let distance = simd_distance(focusNode.simdPosition,
+                                 simd_make_float3(transform.m41,
+                                                  transform.m42,
+                                                  transform.m43))
+    // 2
+    let direction = SCNVector3(-(distance * 2.5) * transform.m31,
+                               -(distance * 2.5) * (transform.m32 - Float.pi / 4),
+                               -(distance * 2.5) * transform.m33)
+    let rotation = SCNVector3(Double.random(min: 0, max: Double.pi),
+                                Double.random(min: 0, max: Double.pi),
+                                Double.random(min: 0, max: Double.pi))
+    
     let position = SCNVector3(transform.m41 + offset.x,
                               transform.m42 + offset.y,
                               transform.m43 + offset.z)
     let diceNode = diceNodes[diceStyle].clone()
     diceNode.name = "dice"
     diceNode.position = position
+    diceNode.eulerAngles = rotation
+    // 1
+    diceNode.physicsBody?.resetTransform()
+    // 2
+    diceNode.physicsBody?.applyForce(direction, asImpulse: true)
     sceneView.scene.rootNode.addChildNode(diceNode)
     diceCount -= 1
   }
